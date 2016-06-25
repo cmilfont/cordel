@@ -2,12 +2,7 @@ import React from 'react';
 
 export default class Search extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.submit = this.submit.bind(this);
-  }
-
-  submit(event) {
+  submit = (event) => {
     this.props.onSubmit(this.inputSearch.value);
     event.preventDefault();
     return false;
