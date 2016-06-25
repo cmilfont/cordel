@@ -1,10 +1,20 @@
 import React from 'react';
 import Search from './search.js';
 import Highlight from './highlight.js';
+import BookLink from './booklink.js';
 
 export default class Shelf extends React.Component {
 
-  state = { highlights: { data:[] } };
+  state = {
+    books: { data: [] },
+    highlights: { data:[] }
+  };
+
+  componentDidMount() {
+    fetch('/books').then(
+      res => res.json().then( this.refreshBooks )
+    );
+  }
 
   search = (query) => {
 
@@ -16,6 +26,18 @@ export default class Shelf extends React.Component {
 
   mapHighlight = hit => {
     return <Highlight id={`high-${hit._id}`} source={hit._source} />;
+  }
+
+  mapBook = book => {
+    return <BookLink id={`high-${book._id}`} book={hit.book} />;
+  }
+
+  refreshBooks = books => {
+    this.setState({
+      books: {
+        data: books.map(this.mapBook)
+      }
+    });
   }
 
   refreshList = list => {
@@ -30,10 +52,13 @@ export default class Shelf extends React.Component {
 
     const highlights = this.state.highlights.data;
 
+    const books = this.state.books.data;
+
     return (
       <div>
         <Search onSubmit={this.search} />
         {highlights}
+        {books}
       </div>
     );
   }
