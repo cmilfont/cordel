@@ -16,7 +16,7 @@ export class Shelves {
     constructor(app, models) {
 
         this.client = new elasticsearch.Client({
-          host: 'localhost:9200',
+          host: process.env['SEARCHBOX_URL'] || 'localhost:9200',
           log: 'trace'
         });
 
