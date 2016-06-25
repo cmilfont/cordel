@@ -9,7 +9,11 @@ export default class Shelf extends React.Component {
   }
 
   search(query) {
-    console.log("Buscou", query);
+
+    fetch(`/search?query=${query}` ).then(
+      res => res.json().then( function(list){ console.log("Achou", list); } )
+    );
+
   }
 
   render() {

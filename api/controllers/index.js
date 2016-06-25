@@ -1,6 +1,7 @@
 'use strict';
 
 import { Users } from "./users.js";
+import { Shelves } from "./shelves.js";
 
 export class Controllers {
 
@@ -10,6 +11,7 @@ export class Controllers {
         res.render('index', { user : req.user });
       });
       new Users(app, models);
+      new Shelves(app, models);
 
   }
 
