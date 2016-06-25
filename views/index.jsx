@@ -17,7 +17,6 @@ export default class Index extends React.Component {
     render() {
         return (
             <DefaultLayout title={this.props.title}>
-                <div id="app"></div>
                 <AppMain user={this.props.user} />
             </DefaultLayout>
         );

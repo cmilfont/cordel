@@ -31,6 +31,7 @@
     "connect-flash": "^0.1.1",
     "connect-multiparty": "^2.0.0",
     "cookie-parser": "^1.4.1",
+    "elasticsearch": "^11.0.1",
     "express": "^4.13.4",
     "express-react-views": "^0.10.0",
     "express-session": "^1.13.0",
@@ -80,7 +81,7 @@
     "postinstall": "sequelize db:migrate",
     "verify:js": "eslint ./app/",
     "watch:css": "stylus -w -c styles/main.styl -o public/assets/css/main.css",
-    "watch:js": "watchify -o public/assets/js/bundle.js -v -d app/App.js",
+    "watch:js": "watchify -o public/assets/js/bundle.js -v -d app/app.js",
     "build:js": "browserify app/app.js -o public/assets/js/bundle.min.js -t babelify -t [uglifyify --no-sourcemap --no-bundle-external]",
     "watch:all": "parallelshell 'npm run watch:js' 'npm run watch:css'",
     "start": "node -r babel-register index.js"
