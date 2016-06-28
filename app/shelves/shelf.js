@@ -74,7 +74,20 @@ export default class Shelf extends React.Component {
             icon={<FontIcon className="fa fa-sign-out" />}
           />
         </AppBar>
-        <Highlights>
+        <Highlights highlights={[
+          {
+            paragraph_id: 30,
+            text: 'ExpressJS, ES6/7'
+          },
+          {
+            paragraph_id: 33,
+            text: 'Product Owner, Coach e Engenheiro,'
+          },
+          {
+            paragraph_id: 35,
+            text: 'acompanhando após o evento pela Produto'
+          }
+        ]}>
           {highlights}
           {books}
 

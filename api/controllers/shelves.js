@@ -13,6 +13,10 @@ export class Shelves {
           });
     }
 
+    books(req, res) {
+      res.send({});
+    }
+
     constructor(app, models) {
 
         this.client = new elasticsearch.Client({
@@ -24,6 +28,7 @@ export class Shelves {
         this.models = models;
 
         app.get('/search', this.search.bind(this) );
+        app.get('/books', this.books.bind(this));
 
     }
 }

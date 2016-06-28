@@ -5,14 +5,18 @@ export default class Highlights extends React.Component {
 
   componentDidMount() {
     window.addEventListener('mouseup', this.selected.bind(this));
+
+    if( this.props.highlights ) {
+      this.props.highlights.forEach(this.markParagraph, this);
+    }
+
   }
 
   onSave = () => {
     const popover = this.refs.popover;
-    const {target, selection, paragraph_id } = popover.state;
-    const {anchorOffset, focusOffset} = selection;
+    const {paragraph_id, selection} = popover.state;
     popover.hide();
-    this.markParagraph(paragraph_id, anchorOffset, focusOffset);
+    this.markParagraph( { paragraph_id, text: selection.toString() } );
   }
 
   selected = (event) => {
@@ -28,26 +32,33 @@ export default class Highlights extends React.Component {
     }
   }
 
-  markParagraph = (paragraph_id, anchorOffset, focusOffset) => {
+  templating = (text) => `<span class="highlight">${text}</span>`;
+
+  markParagraph = ({paragraph_id, text}) => {
+
+    console.log(paragraph_id, text);
+
     const paragraph = this.findParagraph(paragraph_id);
+
     if(paragraph) {
-      paragraph.innerHTML = '<!-- ' + paragraph.childNodes[0].textContent + ' -->' +
-        paragraph.textContent.replace(paragraph.textContent.substring(anchorOffset, focusOffset),
-          (text) => `<span class="highlight">${text}</span>`) +
-        '<!-- ' + paragraph.childNodes[2].textContent + ' -->';
+      let textContent = paragraph.textContent.replace(text, this.templating);
+        const commentStart = paragraph.childNodes[0].textContent;
+        const commentEnd = paragraph.childNodes[2].textContent;
+
+      paragraph.innerHTML = `<!-- ${commentStart} --> ${textContent} <!-- ${commentEnd} -->`;
     }
   }
 
   findParagraph = (paragraph_id) => {
     return Array.prototype.filter.call(this.rootDOM.querySelectorAll('p'), function(paragraph){
-      let achou = false;
+      let found = false;
       const comment = paragraph.childNodes[0];
       if( comment && comment.textContent) {
-        var text = comment.textContent;
-        var count = text.match(`react-text: ${paragraph_id}`);
-        achou = count && count.length;
+        let text = comment.textContent;
+        let count = text.match(`react-text: ${paragraph_id}`);
+        found = count && count.length;
       }
-      return achou;
+      return found;
     })[0];
   }
 
