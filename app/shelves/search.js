@@ -12,13 +12,13 @@ export default class Search extends React.Component {
 
     return (
       <form onSubmit={this.submit}>
-        <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-          <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="sample6">
+        <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label">
+          <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search">
             <i className="material-icons">search</i>
           </label>
           <div className="mdl-textfield__expandable-holder">
-            <input className="mdl-textfield__input" type="text" id="sample6" ref={(ref) => {this.inputSearch = ref}} />
-            <label className="mdl-textfield__label" htmlFor="sample-expandable">Expandable Input</label>
+            <input className="mdl-textfield__input" type="text" id="search" ref={(ref) => {this.inputSearch = ref}} />
+            <label className="mdl-textfield__label" htmlFor="search">Search</label>
           </div>
         </div>
       </form>

@@ -3,6 +3,14 @@ import Search from './search.js';
 import Highlight from './highlight.js';
 import BookLink from './booklink.js';
 
+import AppBar from 'material-ui/AppBar';
+import FontIcon from 'material-ui/FontIcon';
+import FlatButton from 'material-ui/FlatButton';
+
+import Highlights from './highlights.js';
+
+import ReactMarkdown from 'react-markdown';
+
 export default class Shelf extends React.Component {
 
   state = {
@@ -10,11 +18,11 @@ export default class Shelf extends React.Component {
     highlights: { data:[] }
   };
 
-  componentDidMount() {
-    fetch('/books').then(
-      res => res.json().then( this.refreshBooks )
-    );
-  }
+  // componentDidMount() {
+  //   fetch('/books').then(
+  //     res => res.json().then( this.refreshBooks )
+  //   );
+  // }
 
   search = (query) => {
 
@@ -25,11 +33,11 @@ export default class Shelf extends React.Component {
   }
 
   mapHighlight = hit => {
-    return <Highlight id={`high-${hit._id}`} source={hit._source} />;
+    return <Highlight key={`high-${hit._id}`} source={hit._source} />;
   }
 
   mapBook = book => {
-    return <BookLink id={`high-${book._id}`} book={hit.book} />;
+    return <BookLink key={`high-${book._id}`} book={hit.book} />;
   }
 
   refreshBooks = books => {
@@ -56,9 +64,23 @@ export default class Shelf extends React.Component {
 
     return (
       <div>
-        <Search onSubmit={this.search} />
-        {highlights}
-        {books}
+        <AppBar title="Cordel">
+          <Search onSubmit={this.search} />
+          <FlatButton
+            linkButton={true}
+            href="/logout"
+            secondary={true}
+            style={{ "margin" : "auto" }}
+            icon={<FontIcon className="fa fa-sign-out" />}
+          />
+        </AppBar>
+        <Highlights>
+          {highlights}
+          {books}
+
+          <ReactMarkdown source={this.props.contents} />
+
+        </Highlights>
       </div>
     );
   }
