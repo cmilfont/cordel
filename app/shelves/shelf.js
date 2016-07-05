@@ -1,50 +1,64 @@
 import React from 'react';
-import Search from './search.js';
-import Highlight from './highlight.js';
-import BookLink from './booklink.js';
+import Search from './search';
 
-import AppBar from 'material-ui/AppBar';
+import BookLink from './booklink';
+
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
-
-import Divider from 'material-ui/Divider';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import { blue500 } from 'material-ui/styles/colors';
-
-import Highlights from './highlights.js';
-
-import ReactMarkdown from 'react-markdown';
 
 export default class Shelf extends React.Component {
 
   state = {
-    books: { data: [] },
-    highlights: { data:[] }
+    books: { data: [] }
   };
 
-  // componentDidMount() {
-  //   fetch('/books').then(
-  //     res => res.json().then( this.refreshBooks )
-  //   );
-  // }
+  componentDidMount() {
+    // fetch('/books').then(
+    //   res => res.json().then( this.refreshBooks )
+    // );
+
+    const books = [
+      {
+        id: 1,
+        title: "Building Microservices 1st Edition",
+        cover: "//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1491950358&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=milftech-20"
+      },
+      {
+        id: 2,
+        title: "Domain-Driven Design Reference: Definitions and Pattern Summaries",
+        cover: "//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1457501198&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=milftech-20"
+      },
+      {
+        id: 3,
+        title: "Patterns, Principles, and Practices of Domain-Driven Design 1st Edition by Scott Millett  (Author), Nick Tune (Author)",
+        cover: "//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1118714709&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=milftech-20"
+      },
+      {
+        id: 4,
+        title: "Domain-Driven Design Distilled 1st Edition",
+        cover: "//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0134434420&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=milftech-20"
+      },
+      {
+        id: 5,
+        title: "Reactive Messaging Patterns with the Actor Model: Applications and Integration in Scala and Akka 1st Edition",
+        cover: "//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0133846830&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=milftech-20"
+      }
+    ];
+    this.refreshBooks(books);
+
+  }
 
   search = (query) => {
 
-    fetch(`/search?query=${query}` ).then(
-      res => res.json().then( this.refreshList )
-    );
+    debugger;
+    // fetch(`/search?query=${query}` ).then(
+    //   res => res.json().then( this.refreshList )
+    // );
 
-  }
-
-  mapHighlight = hit => {
-    return <Highlight key={`high-${hit._id}`} source={hit._source} />;
   }
 
   mapBook = book => {
-    return <BookLink key={`high-${book._id}`} book={hit.book} />;
+    return <BookLink key={`book-${book.id}`} book={book} />;
   }
 
   refreshBooks = books => {
@@ -55,65 +69,24 @@ export default class Shelf extends React.Component {
     });
   }
 
-  refreshList = list => {
-    this.setState({
-      highlights: {
-        data: list.map(this.mapHighlight)
-      }
-    });
-  }
-
   render() {
-
-    const highlights = this.state.highlights.data;
 
     const books = this.state.books.data;
 
-    this.menu = <IconMenu
-          iconButtonElement={<IconButton><MoreVertIcon color={blue500} /></IconButton>}
-        >
-          <MenuItem primaryText="Refresh" />
-          <MenuItem primaryText="Send feedback" />
-          <MenuItem primaryText="Settings" />
-          <Divider />
-          <MenuItem primaryText="Sign out" />
-    </IconMenu>;
-
     return (
       <div>
-        <AppBar title="Cordel"
-                iconElementLeft={this.menu}
-                className="cordel__toolbar">
           <Search onSubmit={this.search} />
-
           <FlatButton
             linkButton={true}
             href="/logout"
             secondary={true}
+            className="logout"
             style={{ "margin" : "auto" }}
             icon={<FontIcon className="fa fa-sign-out" />}
           />
-        </AppBar>
-
-        <Highlights highlights={[
-          {
-            paragraph_id: 30,
-            text: 'ExpressJS, ES6/7'
-          },
-          {
-            paragraph_id: 33,
-            text: 'Product Owner, Coach e Engenheiro,'
-          },
-          {
-            paragraph_id: 35,
-            text: 'acompanhando após o evento pela Produto'
-          }
-        ]}>
-          {highlights}
-          {books}
-          <ReactMarkdown source={this.props.contents} />
-
-        </Highlights>
+          <div className="shelf">
+            {books}
+          </div>
       </div>
     );
   }

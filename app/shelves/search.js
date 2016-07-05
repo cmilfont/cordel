@@ -11,7 +11,7 @@ export default class Search extends React.Component {
   render() {
 
     return (
-      <form autoComplete="off" onSubmit={this.submit}>
+      <form autoComplete="off" className="search" onSubmit={this.submit}>
         <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label">
           <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search">
             <i className="material-icons">search</i>

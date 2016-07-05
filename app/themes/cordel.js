@@ -1,5 +1,5 @@
 import {
-  brown50, grey50, grey600, blue500, blue400, blue100, fullWhite
+  yellow500, yellow400, yellow50, blue500, blue400, blue50, fullWhite
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 
@@ -9,15 +9,15 @@ export default {
     //height: 50
   },
   toolbar: {
-    color: brown50
+    color: fullWhite
   },
   palette: {
-    primary1Color: fullWhite,
-    primary2Color: brown50,
-    primary3Color: grey600,
-    accent1Color: blue500,
-    accent2Color: blue400,
-    accent3Color: blue100,
+    primary1Color: blue500,
+    primary2Color: blue400,
+    primary3Color: blue50,
+    accent1Color: fullWhite,
+    accent2Color: fullWhite,
+    accent3Color: fullWhite,
     textColor: fullWhite,
     alternateTextColor: '#303030',
     canvasColor: '#303030',
