@@ -2,6 +2,10 @@ import React from 'react';
 
 export default class Search extends React.Component {
 
+  componentDidMount() {
+    debugger;
+  }
+
   submit = (event) => {
     this.props.onSubmit(this.inputSearch.value);
     event.preventDefault();

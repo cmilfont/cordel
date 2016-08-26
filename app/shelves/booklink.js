@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'
 
 export default class BookLink extends React.Component {
 
@@ -10,17 +11,13 @@ export default class BookLink extends React.Component {
       'background': `url("${book.cover}") center / cover`
     };
 
-    const linkSrc = `/books/${book.id}`;
+    const linkSrc = <Link title={book.title} to={`/books/${book.id}`}>{book.title}</Link>;
 
     return (
-
       <div className="mdl-card mdl-shadow--2dp booklink" style={style}>
         <div className="mdl-card__title mdl-card--expand"></div>
-        <div className="mdl-card__actions">
-          <a title={book.title} href={linkSrc}>{book.title}</a>
-        </div>
+        <div className="mdl-card__actions">{linkSrc}</div>
       </div>
-
     );
   }
 }

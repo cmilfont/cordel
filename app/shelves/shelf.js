@@ -1,10 +1,5 @@
 import React from 'react';
-import Search from './search';
-
 import BookLink from './booklink';
-
-import FontIcon from 'material-ui/FontIcon';
-import FlatButton from 'material-ui/FlatButton';
 
 export default class Shelf extends React.Component {
 
@@ -75,15 +70,6 @@ export default class Shelf extends React.Component {
 
     return (
       <div>
-          <Search onSubmit={this.search} />
-          <FlatButton
-            linkButton={true}
-            href="/logout"
-            secondary={true}
-            className="logout"
-            style={{ "margin" : "auto" }}
-            icon={<FontIcon className="fa fa-sign-out" />}
-          />
           <div className="shelf">
             {books}
           </div>
