@@ -50,7 +50,7 @@
     "react-markdown": "*",
     "react-router": "*",
     "react-tap-event-plugin": "^1.0.0",
-    "sequelize": "^3.19.3",
+    "sequelize": "^6.3.5",
     "sequelize-cli": "^2.3.1",
     "webpack": "^2.1.0-beta"
   },
